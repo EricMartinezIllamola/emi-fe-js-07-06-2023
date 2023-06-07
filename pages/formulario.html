@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="../css/formulario.css">
+</head>
+<body>
+    <form name="formulario" action="confirmation.php" method="post" onsubmit="return validation()">
+        <div class="row">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" class="nombre" name="nombre" placeholder="Pepe" 
+            minlength="2" maxlength="30" required pattern="[a-zA-Z\s]+" onkeyup="validarNombre()">
+            <div class="error" id="errorNombre"></div>
+        </div>
+        <div class="row">
+            <label for="email">Email:</label>
+            <input type="text" id="email" class="email" name="email" placeholder="pepe91@gmail.com" onkeyup="validarEmail()">
+            <div class="error" id="errorEmail"></div>
+        </div>
+        <div class="row">
+            <label for="telf">Telf:</label>
+            <input type="text" id="telf" class="telf" name="telf" placeholder="671897656" onkeyup="validarTelf()">
+            <div class="error" id="errorTelf"></div>
+            <div class="row">
+                <label for="dninie">DNI/NIE:</label>
+                <input type="text" id="dninie" class="dninie" name="dninie" placeholder="54692346P" onkeyup="validarDniNie()">
+                <div class="error" id="errorTelf"></div>
+        </div>
+        <div class="row">
+            <label for="genero">Genero:</label> <br>
+            <label for="genero">Hombre</label><input type="radio" name="genero">
+            <label for="genero">Mujer</label><input type="radio" name="genero">
+            <label for="genero">Gato</label><input type="radio" name="genero">
+        </div>
+        <div class="row">
+            <label for="vicio">Hobbies:</label> <br>
+            <label for="vicio">toros</label><input type="checkbox" name="vicio" value="toros">
+            <label for="vicio">folk</label><input type="checkbox" name="vicio" value="folk">
+            <label for="vicio">music</label><input type="checkbox" name="vicio" value="music">
+        </div>
+        <div class="row">
+            <label for="GRPD">GRPD:</label> <br>
+            <input type="checkbox" name="GRPD"><label for="GRPD">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta unde vero corrupti sequi, est vitae?</label>
+        </div>
+        <input type="submit" value="Enviar">
+    </form>
+    <script src="../js/formulario.js"></script>
+</body>
+</html>
