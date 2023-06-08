@@ -24,16 +24,18 @@
             <label for="telf">Telf:</label>
             <input type="text" id="telf" class="telf" name="telf" placeholder="671897656" onkeyup="validarTelf()">
             <div class="error" id="errorTelf"></div>
-            <div class="row">
-                <label for="dninie">DNI/NIE:</label>
-                <input type="text" id="dninie" class="dninie" name="dninie" placeholder="54692346P" onkeyup="validarDniNie()">
-                <div class="error" id="errorTelf"></div>
+        </div>
+        <div class="row">
+            <label for="dninie">DNI/NIE:</label>
+            <input type="text" id="dninie" class="dninie" name="dninie" placeholder="54692346P" onkeyup="validarDniNie()">
+            <div class="error" id="errorDniNie"></div>
         </div>
         <div class="row">
             <label for="genero">Genero:</label> <br>
-            <label for="genero">Hombre</label><input type="radio" name="genero">
-            <label for="genero">Mujer</label><input type="radio" name="genero">
-            <label for="genero">Gato</label><input type="radio" name="genero">
+            <label for="genero">Hombre</label><input type="radio" name="genero" id="hombre" onclick="validarGenero()">
+            <label for="genero">Mujer</label><input type="radio" name="genero" id="mujer" onclick="validarGenero()">
+            <label for="genero">Gato</label><input type="radio" name="genero" id="gato" onclick="validarGenero()">
+            <div class="error" id="errorGenero"></div>
         </div>
         <div class="row">
             <label for="vicio">Hobbies:</label> <br>
@@ -43,7 +45,8 @@
         </div>
         <div class="row">
             <label for="GRPD">GRPD:</label> <br>
-            <input type="checkbox" name="GRPD"><label for="GRPD">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta unde vero corrupti sequi, est vitae?</label>
+            <input type="checkbox" name="GRPD" value="GRPD" onclick="validarGRPD()"><label>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta unde vero corrupti sequi, est vitae?</label>
+            <div class="error" id="errorGRPD"></div>
         </div>
         <input type="submit" value="Enviar">
     </form>

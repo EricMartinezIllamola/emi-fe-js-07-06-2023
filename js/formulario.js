@@ -1,4 +1,4 @@
-let NombreError = EmailError = TelfError = true;
+let NombreError = EmailError = TelfError = GRPDError = GeneroError = DniNieError = true;
 
 function mostrarError(id, mensaje) {
     document.getElementById(id).innerHTML=mensaje;
@@ -18,6 +18,7 @@ function validarNombre() {
         else {
             mostrarError("errorNombre", "");
             NombreError = false;
+            localStorage.setItem("Nombre",nombre);
         }
     }
 }
@@ -36,6 +37,7 @@ function validarEmail() {
         else {
             mostrarError("errorEmail", "");
             EmailError = false;
+            localStorage.setItem("Email",email);
         }
     }
 }
@@ -54,16 +56,92 @@ function validarTelf() {
         else {
             mostrarError("errorTelf", "");
             TelfError = false;
+            localStorage.setItem("Telf",telf);
         }
     }
 }
 
+function validarDniNie() {
+    let dninie = "";
+    dninie = document.formulario.dninie.value;
+    if (dninie === "") {
+        mostrarError("errorDniNie", "ERROR: Campo vacio")
+    }
+    else {
+        mostrarError("errorDniNie", "")
+        var regex = /[XYZ]?\d{8}[A-Z]$/;
+        if (regex.test(dninie) === false) {
+            mostrarError("errorDniNie", "ERROR: Formato no valido")
+        }
+        else {
+            let letradni = dninie[dninie.length-1];
+            let numerodni = parseInt(dninie.match(/\d+/g));
+            let letras = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E", "T"];
+            if (letradni != letras[numerodni % 23]) {
+                mostrarError("errorDniNie", "ERROR: Número y letra no coinciden");
+                console.log(letradni);
+                console.log(letras[numerodni % 23]);
+            } else {
+                mostrarError("errorDniNie", "");
+                DniNieError = false;
+                localStorage.setItem("DniNie",dninie);
+            }
+        }
+    }
+}
+
+function validarGenero() {
+    let hombre = document.getElementById("hombre").checked;
+    let mujer = document.getElementById("mujer").checked;
+    let gato = document.getElementById("gato").checked;
+
+    if (hombre || mujer || gato) {
+        GeneroError = false;
+        mostrarError("errorGenero", "");
+        localStorage.setItem("hombre",hombre);
+        localStorage.setItem("mujer",mujer);
+        localStorage.setItem("gato",gato);
+    } else {
+        mostrarError("errorGenero", "ERROR: Tiene que selccionar un genero");
+    }
+}
+
+function validarGRPD() {
+    let GRPD = document.formulario.GRPD.checked;
+    if (GRPD) {
+        GRPDError = false;
+        mostrarError("errorGRPD", "");
+        localStorage.setItem("GRPD",GRPD);
+    } else {
+        mostrarError("errorGRPD", "ERROR: Es necesario aceptar GRPD");
+    }
+}
+
 function validation() {
-    if (!NombreError && !EmailError && !TelfError) return true;
+    if (!NombreError && !EmailError && !TelfError && !GRPDError && !GeneroError) {
+        localStorage.clear();
+        return true;
+    }
     else {
         validarNombre();
         validarEmail();
         validarTelf();
+        validarDniNie();
+        validarGenero();
+        validarGRPD();
         return false;
     }
+}
+
+window.addEventListener("load", iniciar);
+
+function iniciar() {
+    document.formulario.nombre.value = localStorage.getItem("Nombre");
+    document.formulario.email.value = localStorage.getItem("Email");
+    document.formulario.telf.value = localStorage.getItem("Telf");
+    document.formulario.dninie.value = localStorage.getItem("DniNie");
+    document.formulario.GRPD.checked = localStorage.getItem("GRPD");
+    document.getElementById("hombre").checked = localStorage.getItem("hombre");
+    document.getElementById("mujer").checked = localStorage.getItem("mujer");
+    document.getElementById("gato").checked = localStorage.getItem("gato");
 }
